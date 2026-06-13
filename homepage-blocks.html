@@ -1,0 +1,900 @@
+<!-- ============================================================
+     BEE² HOMEPAGE — SQUARESPACE CODE BLOCKS
+     Paste each labelled block into a separate Squarespace Code Block.
+     Global fonts (Fraunces, Urbanist) and CSS tokens are assumed
+     already declared in Site-wide Code Injection > Header.
+     ============================================================ -->
+
+
+<!-- ===========================================================
+     BLOCK 1 — NAVIGATION
+     =========================================================== -->
+<style>
+  .b2-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+    padding: 0 5vw;
+    height: 68px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: transparent;
+    transition: background 0.4s ease, box-shadow 0.4s ease;
+  }
+  .b2-nav.scrolled {
+    background: var(--color-navy);
+    box-shadow: 0 2px 24px rgba(0,0,0,0.35);
+  }
+  .b2-nav__logo {
+    font-family: 'Fraunces', serif;
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #fff;
+    text-decoration: none;
+    letter-spacing: -0.01em;
+  }
+  .b2-nav__links {
+    display: flex;
+    gap: 2.4rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .b2-nav__links a {
+    font-family: 'Urbanist', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.82);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .b2-nav__links a:hover { color: var(--color-lemon); }
+  .b2-nav__cta {
+    font-family: 'Urbanist', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-navy);
+    background: var(--color-lemon);
+    padding: 0.55rem 1.1rem;
+    border-radius: 2px;
+    text-decoration: none;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+  .b2-nav__cta:hover { opacity: 0.88; transform: scale(1.03); }
+
+  /* hamburger */
+  .b2-nav__burger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 4px;
+  }
+  .b2-nav__burger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: #fff;
+    border-radius: 2px;
+    transition: transform 0.3s, opacity 0.3s;
+  }
+  .b2-nav__burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .b2-nav__burger.open span:nth-child(2) { opacity: 0; }
+  .b2-nav__burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* mobile drawer */
+  .b2-nav__drawer {
+    display: none;
+    position: fixed;
+    top: 68px;
+    left: 0;
+    width: 100%;
+    background: var(--color-navy);
+    padding: 1.5rem 5vw 2rem;
+    z-index: 9998;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+  .b2-nav__drawer.open { display: flex; }
+  .b2-nav__drawer a {
+    font-family: 'Urbanist', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: rgba(255,255,255,0.85);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    padding-bottom: 1rem;
+  }
+  .b2-nav__drawer a:last-child { border-bottom: none; }
+  .b2-nav__drawer a:hover { color: var(--color-lemon); }
+
+  @media (max-width: 768px) {
+    .b2-nav__links,
+    .b2-nav__cta { display: none; }
+    .b2-nav__burger { display: flex; }
+  }
+</style>
+
+<nav class="b2-nav" id="b2-nav" aria-label="Main navigation">
+  <a href="/" class="b2-nav__logo" aria-label="BEE² home">BEE²</a>
+  <ul class="b2-nav__links" role="list">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#how-we-work">How we work</a></li>
+    <li><a href="#partners">Partners</a></li>
+  </ul>
+  <a href="https://calendly.com/timothy-beesquared/30min" class="b2-nav__cta" target="_blank" rel="noopener">Book a call</a>
+  <button class="b2-nav__burger" id="b2-burger" aria-label="Toggle menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="b2-nav__drawer" id="b2-drawer" role="navigation">
+  <a href="#services">Services</a>
+  <a href="#how-we-work">How we work</a>
+  <a href="#partners">Partners</a>
+  <a href="https://calendly.com/timothy-beesquared/30min" target="_blank" rel="noopener">Book a call →</a>
+</div>
+
+<!-- spacer so page content doesn't sit under fixed nav -->
+<div style="height:68px;"></div>
+
+
+<!-- ===========================================================
+     BLOCK 2 — HERO
+     =========================================================== -->
+<style>
+  .b2-hero {
+    min-height: 96vh;
+    background: linear-gradient(135deg, #001A5D 0%, #5588FD 58%, #FFC655 100%);
+    display: flex;
+    align-items: center;
+    padding: 8rem 5vw 6rem;
+    position: relative;
+    overflow: hidden;
+  }
+  /* subtle grain overlay */
+  .b2-hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
+    opacity: 0.18;
+    pointer-events: none;
+  }
+  .b2-hero__inner {
+    position: relative;
+    z-index: 1;
+    max-width: 820px;
+  }
+  .b2-hero__eyebrow {
+    font-family: 'Urbanist', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-lemon);
+    margin: 0 0 1.8rem;
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .b2-hero__headline {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+    font-weight: 700;
+    line-height: 1.1;
+    color: #fff;
+    margin: 0 0 1.8rem;
+    letter-spacing: -0.02em;
+  }
+  /* each word gets .b2-word class via JS for stagger */
+  .b2-hero__headline .b2-word {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+  }
+  .b2-hero__headline .b2-word.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .b2-hero__subline {
+    font-family: 'Urbanist', sans-serif;
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    font-weight: 400;
+    line-height: 1.65;
+    color: rgba(255,255,255,0.82);
+    max-width: 580px;
+    margin: 0 0 2.8rem;
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 0.5s ease 0.6s, transform 0.5s ease 0.6s;
+  }
+  .b2-hero__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Urbanist', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    color: var(--color-navy);
+    background: var(--color-lemon);
+    padding: 0.9rem 2rem;
+    border-radius: 2px;
+    text-decoration: none;
+    opacity: 0;
+    transform: translateY(14px) scale(0.97);
+    transition: opacity 0.5s ease 0.85s,
+                transform 0.5s ease 0.85s,
+                background 0.25s,
+                box-shadow 0.25s;
+  }
+  .b2-hero__cta:hover {
+    background: #fff;
+    box-shadow: 0 8px 28px rgba(0,0,0,0.22);
+    transform: scale(1.04);
+  }
+  /* hero-loaded state toggled by JS */
+  .hero-loaded .b2-hero__eyebrow,
+  .hero-loaded .b2-hero__subline,
+  .hero-loaded .b2-hero__cta {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+</style>
+
+<section class="b2-hero" id="hero">
+  <div class="b2-hero__inner">
+    <p class="b2-hero__eyebrow">Fractional strategy &amp; marketing</p>
+    <h1 class="b2-hero__headline" id="b2-hero-headline">
+      Most businesses don't fail from lack of strategy. They fail from lack of follow-through.
+    </h1>
+    <p class="b2-hero__subline">
+      BEE² is a fractional strategy and marketing consultancy. We work inside your business — not above it — to close the gap between what's planned and what actually gets done.
+    </p>
+    <a href="https://calendly.com/timothy-beesquared/30min" class="b2-hero__cta" target="_blank" rel="noopener">
+      Book a conversation <span aria-hidden="true">→</span>
+    </a>
+  </div>
+</section>
+
+
+<!-- ===========================================================
+     BLOCK 3 — PROBLEM SECTION
+     =========================================================== -->
+<style>
+  .b2-problem {
+    background: var(--color-navy);
+    padding: 7rem 5vw;
+  }
+  .b2-problem__inner {
+    max-width: 680px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .b2-problem__header {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.8rem, 3.8vw, 3rem);
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin: 0 0 1.8rem;
+  }
+  .b2-problem__header em {
+    font-style: normal;
+    color: var(--color-lemon);
+  }
+  .b2-problem__body {
+    font-family: 'Urbanist', sans-serif;
+    font-size: clamp(1rem, 1.8vw, 1.15rem);
+    font-weight: 400;
+    line-height: 1.75;
+    color: rgba(255,255,255,0.72);
+  }
+  .b2-problem__divider {
+    width: 40px;
+    height: 2px;
+    background: var(--color-lemon);
+    margin: 0 auto 2.4rem;
+    display: block;
+  }
+
+  /* reveal utility — used across sections */
+  .b2-reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .b2-reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .b2-reveal[data-delay="1"] { transition-delay: 0.12s; }
+  .b2-reveal[data-delay="2"] { transition-delay: 0.24s; }
+  .b2-reveal[data-delay="3"] { transition-delay: 0.36s; }
+  .b2-reveal[data-delay="4"] { transition-delay: 0.48s; }
+  .b2-reveal[data-delay="5"] { transition-delay: 0.6s; }
+</style>
+
+<section class="b2-problem" id="problem">
+  <div class="b2-problem__inner">
+    <span class="b2-problem__divider b2-reveal"></span>
+    <h2 class="b2-problem__header b2-reveal" data-delay="1">
+      You have a plan. You're just not <em>moving</em>.
+    </h2>
+    <p class="b2-problem__body b2-reveal" data-delay="2">
+      You've done the work. The strategy is solid. The deck is good. And yet — six months later, it's still a deck. This is the gap BEE² closes.
+    </p>
+  </div>
+</section>
+
+
+<!-- ===========================================================
+     BLOCK 4 — SERVICES
+     =========================================================== -->
+<style>
+  .b2-services {
+    background: #040f2e;
+    padding: 7rem 5vw;
+    anchor-name: --services;
+  }
+  .b2-services__header-row {
+    display: flex;
+    align-items: baseline;
+    gap: 1.2rem;
+    margin-bottom: 3.6rem;
+  }
+  .b2-services__label {
+    font-family: 'Urbanist', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-lemon);
+  }
+  .b2-services__heading {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.02em;
+    margin: 0;
+  }
+  .b2-services__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5px;
+  }
+  .b2-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    padding: 2.4rem 2rem;
+    position: relative;
+    overflow: hidden;
+    cursor: default;
+    transition: border-color 0.3s, background 0.3s;
+  }
+  .b2-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--color-lemon);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s ease;
+  }
+  .b2-card:hover {
+    border-color: rgba(255, 198, 85, 0.28);
+    background: rgba(255, 198, 85, 0.05);
+  }
+  .b2-card:hover::before { transform: scaleX(1); }
+
+  .b2-card__number {
+    font-family: 'Fraunces', serif;
+    font-size: 0.7rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.28);
+    margin-bottom: 1.2rem;
+  }
+  .b2-card__title {
+    font-family: 'Fraunces', serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: #fff;
+    line-height: 1.25;
+    margin: 0 0 1.4rem;
+  }
+  .b2-card__descriptor {
+    font-family: 'Urbanist', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 400;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.0);
+    max-height: 0;
+    overflow: hidden;
+    transform: translateY(10px);
+    transition: color 0.35s ease 0.05s,
+                max-height 0.4s ease,
+                transform 0.35s ease 0.05s;
+  }
+  .b2-card:hover .b2-card__descriptor {
+    color: rgba(255,255,255,0.7);
+    max-height: 200px;
+    transform: translateY(0);
+  }
+
+  @media (max-width: 600px) {
+    .b2-services__grid { grid-template-columns: 1fr; }
+    .b2-card__descriptor {
+      color: rgba(255,255,255,0.6);
+      max-height: 200px;
+      transform: translateY(0);
+    }
+  }
+</style>
+
+<section class="b2-services" id="services">
+  <div class="b2-services__header-row b2-reveal">
+    <span class="b2-services__label">What we do</span>
+  </div>
+  <h2 class="b2-services__heading b2-reveal" data-delay="1" style="margin-bottom:3rem;">What we do</h2>
+  <div class="b2-services__grid">
+
+    <div class="b2-card b2-reveal" data-delay="1">
+      <p class="b2-card__number">01</p>
+      <h3 class="b2-card__title">Corporate strategy and business transformation</h3>
+      <p class="b2-card__descriptor">Turn direction into execution. We build the structure, accountability, and alignment your organisation needs to move.</p>
+    </div>
+
+    <div class="b2-card b2-reveal" data-delay="2">
+      <p class="b2-card__number">02</p>
+      <h3 class="b2-card__title">Brand development</h3>
+      <p class="b2-card__descriptor">Brand is not a logo. It's the reason someone chooses you. We build brands that do commercial work.</p>
+    </div>
+
+    <div class="b2-card b2-reveal" data-delay="3">
+      <p class="b2-card__number">03</p>
+      <h3 class="b2-card__title">Marketing and lead generation</h3>
+      <p class="b2-card__descriptor">We fix the clarity problem first. Then build the system that turns it into pipeline.</p>
+    </div>
+
+    <div class="b2-card b2-reveal" data-delay="4">
+      <p class="b2-card__number">04</p>
+      <h3 class="b2-card__title">Project management</h3>
+      <p class="b2-card__descriptor">Delivery. Not a delivery update. We own the execution from start to finish.</p>
+    </div>
+
+    <div class="b2-card b2-reveal" data-delay="5">
+      <p class="b2-card__number">05</p>
+      <h3 class="b2-card__title">Executive coaching and leadership</h3>
+      <p class="b2-card__descriptor">A thinking partner who will challenge, not just support. At the moments when the quality of thinking matters most.</p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ===========================================================
+     BLOCK 5 — HOW WE WORK
+     =========================================================== -->
+<style>
+  .b2-how {
+    background: var(--color-navy);
+    padding: 7rem 5vw;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  .b2-how__label {
+    font-family: 'Urbanist', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-lemon);
+    display: block;
+    margin-bottom: 1rem;
+  }
+  .b2-how__heading {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.02em;
+    margin: 0 0 4.5rem;
+    max-width: 560px;
+    line-height: 1.15;
+  }
+  .b2-steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+  .b2-step {
+    padding: 2.4rem 2rem 2.4rem 0;
+    border-left: 1px solid rgba(255,255,255,0.1);
+    padding-left: 2rem;
+    transition: border-color 0.3s;
+  }
+  .b2-step:hover { border-color: var(--color-lemon); }
+  .b2-step__index {
+    font-family: 'Fraunces', serif;
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: rgba(255,255,255,0.08);
+    line-height: 1;
+    margin-bottom: 1.4rem;
+    display: block;
+  }
+  .b2-step__title {
+    font-family: 'Fraunces', serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--color-lemon);
+    margin: 0 0 0.9rem;
+  }
+  .b2-step__body {
+    font-family: 'Urbanist', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 400;
+    line-height: 1.65;
+    color: rgba(255,255,255,0.65);
+  }
+  @media (max-width: 700px) {
+    .b2-steps { grid-template-columns: 1fr; }
+    .b2-step { border-left: none; border-top: 1px solid rgba(255,255,255,0.1); padding: 2rem 0; }
+    .b2-step:hover { border-color: var(--color-lemon); }
+  }
+</style>
+
+<section class="b2-how" id="how-we-work">
+  <span class="b2-how__label b2-reveal">Process</span>
+  <h2 class="b2-how__heading b2-reveal" data-delay="1">We work in the room, not above it.</h2>
+  <div class="b2-steps">
+
+    <div class="b2-step b2-reveal" data-delay="1">
+      <span class="b2-step__index">01</span>
+      <h3 class="b2-step__title">Understand</h3>
+      <p class="b2-step__body">We start by listening — to understand where you actually are and what's holding you back.</p>
+    </div>
+
+    <div class="b2-step b2-reveal" data-delay="2">
+      <span class="b2-step__index">02</span>
+      <h3 class="b2-step__title">Build</h3>
+      <p class="b2-step__body">We design the right approach for your situation. Not a template. A plan your team can own.</p>
+    </div>
+
+    <div class="b2-step b2-reveal" data-delay="3">
+      <span class="b2-step__index">03</span>
+      <h3 class="b2-step__title">Execute</h3>
+      <p class="b2-step__body">We stay in it. Weekly check-ins, execution support, course corrections. We measure what matters.</p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ===========================================================
+     BLOCK 6 — PARTNERS
+     =========================================================== -->
+<style>
+  .b2-partners {
+    background: #040f2e;
+    padding: 7rem 5vw;
+  }
+  .b2-partners__label {
+    font-family: 'Urbanist', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-lemon);
+    display: block;
+    margin-bottom: 1rem;
+  }
+  .b2-partners__heading {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.02em;
+    margin: 0 0 4rem;
+    max-width: 540px;
+    line-height: 1.15;
+  }
+  .b2-partners__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px;
+  }
+  .b2-partner {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    padding: 2.8rem 2.4rem;
+    transition: border-color 0.3s;
+  }
+  .b2-partner:hover { border-color: rgba(255,198,85,0.28); }
+  .b2-partner__location {
+    font-family: 'Urbanist', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-lemon);
+    margin: 0 0 1rem;
+  }
+  .b2-partner__name {
+    font-family: 'Fraunces', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 1.2rem;
+    line-height: 1.15;
+  }
+  .b2-partner__role {
+    font-family: 'Urbanist', sans-serif;
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.65);
+    margin: 0 0 1.2rem;
+  }
+  .b2-partner__sectors {
+    font-family: 'Urbanist', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+  }
+  @media (max-width: 640px) {
+    .b2-partners__grid { grid-template-columns: 1fr; }
+  }
+</style>
+
+<section class="b2-partners" id="partners">
+  <span class="b2-partners__label b2-reveal">The team</span>
+  <h2 class="b2-partners__heading b2-reveal" data-delay="1">Two partners. One shared commitment.</h2>
+  <div class="b2-partners__grid">
+
+    <div class="b2-partner b2-reveal" data-delay="2">
+      <p class="b2-partner__location">Malta</p>
+      <h3 class="b2-partner__name">Timothy Grech</h3>
+      <p class="b2-partner__role">Leads brand strategy, marketing, and communications.</p>
+      <p class="b2-partner__sectors">Maritime · Education · Professional services · Banking</p>
+    </div>
+
+    <div class="b2-partner b2-reveal" data-delay="3">
+      <p class="b2-partner__location">Zug, Switzerland</p>
+      <h3 class="b2-partner__name">Josef N. Grech</h3>
+      <p class="b2-partner__role">Leads corporate strategy, business transformation, and executive coaching.</p>
+      <p class="b2-partner__sectors">Pharma · Life sciences</p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ===========================================================
+     BLOCK 7 — FINAL CTA + ALL SCRIPTS
+     =========================================================== -->
+<style>
+  .b2-cta {
+    background: linear-gradient(135deg, #001A5D 0%, #5588FD 60%, #FFC655 100%);
+    padding: 8rem 5vw;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+  }
+  .b2-cta::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
+    opacity: 0.18;
+    pointer-events: none;
+  }
+  .b2-cta__inner {
+    position: relative;
+    z-index: 1;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+  .b2-cta__headline {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin: 0 0 1.4rem;
+  }
+  .b2-cta__body {
+    font-family: 'Urbanist', sans-serif;
+    font-size: clamp(1rem, 1.8vw, 1.1rem);
+    line-height: 1.65;
+    color: rgba(255,255,255,0.78);
+    margin: 0 0 2.8rem;
+  }
+  .b2-cta__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Urbanist', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    color: var(--color-navy);
+    background: var(--color-lemon);
+    padding: 1rem 2.2rem;
+    border-radius: 2px;
+    text-decoration: none;
+    transition: background 0.25s, transform 0.2s, box-shadow 0.25s;
+  }
+  .b2-cta__btn:hover {
+    background: #fff;
+    transform: scale(1.04);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.25);
+  }
+
+  .b2-footer-line {
+    background: var(--color-navy);
+    padding: 1.8rem 5vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .b2-footer-line__logo {
+    font-family: 'Fraunces', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+  }
+  .b2-footer-line__copy {
+    font-family: 'Urbanist', sans-serif;
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.35);
+  }
+</style>
+
+<section class="b2-cta" id="contact">
+  <div class="b2-cta__inner">
+    <h2 class="b2-cta__headline b2-reveal">If things aren't moving, let's talk about why.</h2>
+    <p class="b2-cta__body b2-reveal" data-delay="1">No pitch. No proposal until we've understood the real situation.</p>
+    <a href="https://calendly.com/timothy-beesquared/30min" class="b2-cta__btn b2-reveal" data-delay="2" target="_blank" rel="noopener">
+      Book 30 minutes <span aria-hidden="true">→</span>
+    </a>
+  </div>
+</section>
+
+<footer class="b2-footer-line">
+  <a href="/" class="b2-footer-line__logo">BEE²</a>
+  <p class="b2-footer-line__copy">© 2025 BEE² Consultants · beesquared.ch</p>
+</footer>
+
+<!-- ============================================================
+     ALL JAVASCRIPT — handles every section above
+     ============================================================ -->
+<script>
+(function () {
+  'use strict';
+
+  /* ── 1. Smooth scroll ── */
+  document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var target = document.querySelector(this.getAttribute('href'));
+      if (!target) return;
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth' });
+      /* close mobile drawer if open */
+      var drawer = document.getElementById('b2-drawer');
+      var burger = document.getElementById('b2-burger');
+      if (drawer && drawer.classList.contains('open')) {
+        drawer.classList.remove('open');
+        burger.classList.remove('open');
+        burger.setAttribute('aria-expanded', 'false');
+      }
+    });
+  });
+
+  /* ── 2. Sticky nav ── */
+  var nav = document.getElementById('b2-nav');
+  if (nav) {
+    var onScroll = function () {
+      if (window.scrollY > 40) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }
+
+  /* ── 3. Mobile burger ── */
+  var burger = document.getElementById('b2-burger');
+  var drawer = document.getElementById('b2-drawer');
+  if (burger && drawer) {
+    burger.addEventListener('click', function () {
+      var open = drawer.classList.toggle('open');
+      burger.classList.toggle('open', open);
+      burger.setAttribute('aria-expanded', String(open));
+    });
+  }
+
+  /* ── 4. Hero headline word stagger ── */
+  var headline = document.getElementById('b2-hero-headline');
+  if (headline) {
+    var text = headline.innerText;
+    var words = text.split(/\s+/);
+    headline.innerHTML = words
+      .map(function (w) { return '<span class="b2-word">' + w + '</span>'; })
+      .join(' ');
+
+    /* trigger on next frame so CSS transitions work */
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        document.body.classList.add('hero-loaded');
+        var wordEls = headline.querySelectorAll('.b2-word');
+        wordEls.forEach(function (el, i) {
+          setTimeout(function () {
+            el.classList.add('visible');
+          }, 80 + i * 55);
+        });
+      });
+    });
+  }
+
+  /* ── 5. IntersectionObserver — scroll reveals ── */
+  var revealItems = document.querySelectorAll('.b2-reveal');
+  if ('IntersectionObserver' in window && revealItems.length) {
+    var observer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+    );
+    revealItems.forEach(function (el) { observer.observe(el); });
+  } else {
+    /* fallback: show everything immediately */
+    revealItems.forEach(function (el) { el.classList.add('visible'); });
+  }
+
+  /* ── 6. Service card touch support (reveal descriptor on tap) ── */
+  if ('ontouchstart' in window) {
+    document.querySelectorAll('.b2-card').forEach(function (card) {
+      card.addEventListener('click', function () {
+        this.classList.toggle('touch-active');
+      });
+    });
+    /* add touch-active state that mirrors :hover */
+    var styleTag = document.createElement('style');
+    styleTag.textContent = [
+      '.b2-card.touch-active { border-color: rgba(255,198,85,0.28); background: rgba(255,198,85,0.05); }',
+      '.b2-card.touch-active::before { transform: scaleX(1); }',
+      '.b2-card.touch-active .b2-card__descriptor { color: rgba(255,255,255,0.7); max-height: 200px; transform: translateY(0); }'
+    ].join('\n');
+    document.head.appendChild(styleTag);
+  }
+
+})();
+</script>
