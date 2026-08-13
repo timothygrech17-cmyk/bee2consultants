@@ -1,0 +1,25 @@
+{
+  "pkg": "website",
+  "globalName": "BEE2",
+  "shape": "package",
+  "srcDir": "src/components",
+  "tsconfig": ".design-sync/tsconfig.sync.json",
+  "buildCmd": "node .design-sync/build-prepare.mjs",
+  "cssEntry": ".design-sync/build/ds.css",
+  "extraFonts": [
+    ".design-sync/fonts/brand-fonts.css"
+  ],
+  "overrides": {
+    "Logo": {
+      "cardMode": "column"
+    },
+    "PartnerCard": {
+      "cardMode": "column"
+    },
+    "SiteHeader": {
+      "cardMode": "single",
+      "viewport": "1280x360"
+    }
+  },
+  "readmeHeader": ".design-sync/conventions.md"
+}

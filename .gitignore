@@ -39,3 +39,16 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# design-sync (claude.ai/design)
+# Staged converter scripts + their deps, regenerated build output, and machine
+# state. Everything else under .design-sync/ is a durable sync input and IS
+# committed: config.json, NOTES.md, conventions.md, previews/, shims/, fonts/
+# and the *.mjs prepare scripts.
+/.ds-sync/
+/ds-bundle/
+.design-sync/.cache/
+.design-sync/learnings/
+.design-sync/node_modules
+.design-sync/build/
+.design-sync/shims/public-assets.ts
